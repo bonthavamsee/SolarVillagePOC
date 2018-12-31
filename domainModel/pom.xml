@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>org.solarVillage</groupId>
+    <artifactId>SolarVillagePOC</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <artifactId>domainModel</artifactId>
+  <name>domainModel</name>
+  <url>http://maven.apache.org</url>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <springframework.version>4.3.0.RELEASE</springframework.version>
+    <jackson.library>2.8.10</jackson.library>
+  </properties>
+  <dependencies>
+	<dependency>
+       <groupId>org.springframework</groupId>
+       <artifactId>spring-core</artifactId>
+       <version>${springframework.version}</version>
+       <exclusions>
+       	<exclusion>
+       		<groupId>commons-logging</groupId>
+       		<artifactId>commons-logging</artifactId>
+       	</exclusion>
+       </exclusions>
+	</dependency>
+		<!--  ORACLE JDBC driver, need install yourself
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>11.2.0</version>
+		</dependency> -->
+		<!-- https://mvnrepository.com/artifact/oracle/ojdbc6 -->
+	<!-- <dependency>
+    	<groupId>oracle</groupId>
+    	<artifactId>ojdbc6</artifactId>
+    	<version>11.2.0.3</version>
+		</dependency> -->
+	    <dependency>
+       <groupId>com.fasterxml.jackson.core</groupId>
+       <artifactId>jackson-databind</artifactId>
+       <version>${jackson.library}</version>
+    </dependency>
+    <!-- Hibernate 4.3.6 Final -->
+    <dependency>
+       <groupId>org.hibernate</groupId>
+       <artifactId>hibernate-core</artifactId>
+       <version>4.3.6.Final</version>
+       <exclusions>
+       	<exclusion>
+       		<groupId>antlr</groupId>
+       		<artifactId>antlr</artifactId>
+       	</exclusion>
+       	<exclusion>
+       		<groupId>org.jboss</groupId>
+       		<artifactId>jandex</artifactId>
+       	</exclusion>
+       	<exclusion>
+       		<groupId>org.jboss.spec.javax.transaction</groupId>
+       		<artifactId>jboss-transaction-api_1.2_spec</artifactId>
+       	</exclusion>
+       	<exclusion>
+       		<groupId>org.jboss.logging</groupId>
+       		<artifactId>jboss-logging-annotations</artifactId>
+       	</exclusion>
+       	<exclusion>
+       		<groupId>org.jboss.logging</groupId>
+       		<artifactId>jboss-logging</artifactId>
+       	</exclusion>
+       	<exclusion>
+       		<groupId>dom4j</groupId>
+       		<artifactId>dom4j</artifactId>
+       	</exclusion>
+       	<exclusion>
+       		<groupId>org.javassist</groupId>
+       		<artifactId>javassist</artifactId>
+       	</exclusion>
+       	<exclusion>
+       		<groupId>xml-apis</groupId>
+       		<artifactId>xml-apis</artifactId>
+       	</exclusion>
+       </exclusions>
+    </dependency>
+    <!-- Mysql Connector -->
+    <dependency>
+       <groupId>mysql</groupId>
+       <artifactId>mysql-connector-java</artifactId>
+       <version>8.0.12</version>
+       <exclusions>
+       	<exclusion>
+       		<groupId>com.google.protobuf</groupId>
+       		<artifactId>protobuf-java</artifactId>
+       	</exclusion>
+       </exclusions>
+    </dependency>
+  </dependencies>
+</project>

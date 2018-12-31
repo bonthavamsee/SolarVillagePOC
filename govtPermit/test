@@ -1,0 +1,5 @@
+create table rh_test_database.ElectricalPermit(permitApplicationNumber VARCHAR(256) primary key,permitStatus VARCHAR(50),electricalConnnectionNumber VARCHAR(50));
+commit;
+select * from rh_test_database.ElectricalPermit;
+update rh_test_database.ElectricalPermit set permitStatus='2' where permitApplicationNumber='123456';
+create table StructuralPermit(permitApplicationNumber VARCHAR(256) primary key,permitStatus VARCHAR(50),buildingRegistrationNumber VARCHAR(50));
