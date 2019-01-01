@@ -80,4 +80,5 @@ The  _**Kie Server**_  is a modular, standalone server component that can be use
 The _Kie Server_ is a web application that can be deployed in _JBoss EAP_, _Wildfly_, _Tomcat_ or any other Java application server or web container. It works by accessing kjars from a Maven repository and exposing its rules and processes throught HTTP or JMS.
 
 When a _Kie Server_ uses the _Business-Central_ as its _Controller_, it happens to be a _**Managed Kie Server**_. We will be using this type of configuration for our server.
+
 ![TEST IMAGE](src/resources/img/test.jpg)
