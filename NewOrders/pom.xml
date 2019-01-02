@@ -8,13 +8,6 @@
   <packaging>kjar</packaging>
   <name>NewOrders</name>
   <description>Red Hat PAM Solution for handling New Orders for Solar Village</description>
-  
-   <parent>
-  <groupId>org.solarVillage</groupId>
-  <artifactId>SolarVillagePOC</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  </parent>
-  
   <dependencies>
     <dependency>
       <groupId>com.thoughtworks.xstream</groupId>
