@@ -1,6 +1,10 @@
 package org.govtPermit.controller;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.domainModel.govtPermit.*;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -94,7 +98,7 @@ public class RequestResponseStatic {
 	}	
 	
 	
-	//Get Electrical Request Status
+	//Get Structural Request Status
 	@RequestMapping(value = "/getStructuralReqStatus", method = RequestMethod.GET)
 	public StructuralPermit getStructuralReq(@RequestParam(value = "id")String Id) {
 		StructuralPermit sp=null;
@@ -149,7 +153,7 @@ public class RequestResponseStatic {
 		return response;
 	}
 	
-	//Rescind Electrical Request
+	//Rescind Structural Request
 	@RequestMapping(value = "/rescindStructuralRequest", method = RequestMethod.GET)
 	public BaseResponse rescindStructuralReq(@RequestParam(value = "id") String Id) {
 		BaseResponse response = new BaseResponse();
@@ -186,7 +190,7 @@ public class RequestResponseStatic {
 	
 	//Change Structural Status
 	@RequestMapping(value = "/changeStructuralStatus", method = RequestMethod.POST)
-	public BaseResponse changeStructuralStats(@RequestParam(value = "id") String Id,@RequestParam(value = "status") String status) {
+	public BaseResponse changeStructuralStats(@RequestParam(value = "id") String Id,@RequestParam(value = "status") PermitStatus status) {
 		BaseResponse response = new BaseResponse();
 		StructuralPermit sp=null;
 
@@ -194,14 +198,15 @@ public class RequestResponseStatic {
 			sp=dataStoreS.get(Id);
 			if(sp!=null)
 			{
-				if(status.equalsIgnoreCase("Accepted"))
+				/*if(status.equalsIgnoreCase("Accepted"))
 					sp.setPermitStatus(PermitStatus.ACCEPTED);
 				else if(status.equalsIgnoreCase("Rejected"))
 					sp.setPermitStatus(PermitStatus.REJECTED);
 				else if(status.equalsIgnoreCase("Pending"))
 					sp.setPermitStatus(PermitStatus.PENDING);
 				else
-					sp.setPermitStatus(PermitStatus.UNDEFINED);
+					sp.setPermitStatus(PermitStatus.UNDEFINED);*/
+				sp.setPermitStatus(status);
 				dataStoreS.put(Id, sp);
 				response.setStatus(SUCCESS_STATUS);
 				response.setCode(CODE_SUCCESS);
@@ -229,7 +234,7 @@ public class RequestResponseStatic {
 
 	//Change Electrical Status
 		@RequestMapping(value = "/changeElectricalStatus", method = RequestMethod.POST)
-		public BaseResponse changeElectricalStats(@RequestParam(value = "id") String Id,@RequestParam(value = "status") String status) {
+		public BaseResponse changeElectricalStats(@RequestParam(value = "id") String Id,@RequestParam(value = "status") PermitStatus status) {
 			BaseResponse response = new BaseResponse();
 			ElectricalPermit ep=null;
 
@@ -237,14 +242,15 @@ public class RequestResponseStatic {
 				ep=dataStoreE.get(Id);
 				if(ep!=null)
 				{
-					if(status.equalsIgnoreCase("Accepted"))
+					/*if(status.equalsIgnoreCase("Accepted"))
 						ep.setPermitStatus(PermitStatus.ACCEPTED);
 					else if(status.equalsIgnoreCase("Rejected"))
 						ep.setPermitStatus(PermitStatus.REJECTED);
 					else if(status.equalsIgnoreCase("Pending"))
 						ep.setPermitStatus(PermitStatus.PENDING);
 					else
-						ep.setPermitStatus(PermitStatus.UNDEFINED);
+						ep.setPermitStatus(PermitStatus.UNDEFINED);*/
+					ep.setPermitStatus(status);
 					dataStoreE.put(Id, ep);
 					response.setStatus(SUCCESS_STATUS);
 					response.setCode(CODE_SUCCESS);
@@ -269,4 +275,64 @@ public class RequestResponseStatic {
 
 			return response;
 		}
+		
+		//Get dataStoreE file
+		@RequestMapping(value = "/getdataStoreE", method = RequestMethod.GET)
+		public String getdataStoreE() {
+			
+			FileWriter fileWriter = null;
+			String fileString="";
+			try {
+				ElectricalPermit ep=null;
+				Set<String> keySet=dataStoreE.keySet();
+				Iterator<String> it=keySet.iterator();
+				
+				while(it.hasNext())
+				{
+					ep=dataStoreE.get(it.next());
+					fileString+=ep.getPermitApplicationNumber()+"\t"+ep.getElectricalConnnectionNumber()+"\t"+ep.getPermitStatus().toString()+"\n";
+				}
+			    fileWriter = new FileWriter("c:/temp/dataStoreE.txt");
+			    fileWriter.write(fileString);
+			    fileWriter.close();
+			}
+			catch(Exception e)
+			{
+				 System.out.println("---------STACK TRACE START---------------");
+				 e.printStackTrace();
+				 System.out.println("---------STACK TRACE END---------------");
+			}
+
+			return fileString;
+		}	
+		
+		//Get dataStoreS file
+		@RequestMapping(value = "/getdataStoreS", method = RequestMethod.GET)
+		public String getdataStoreS() {
+			
+			FileWriter fileWriter = null;
+			String fileString="";
+			try {
+				StructuralPermit sp=null;
+				Set<String> keySet=dataStoreS.keySet();
+				Iterator<String> it=keySet.iterator();
+				
+				while(it.hasNext())
+				{
+					sp=dataStoreS.get(it.next());
+					fileString+=sp.getPermitApplicationNumber()+"\t"+sp.getBuildingRegistrationNumber()+"\t"+sp.getPermitStatus().toString()+"\n";
+				}
+			    fileWriter = new FileWriter("c:/temp/dataStoreS.txt");
+			    fileWriter.write(fileString);
+			    fileWriter.close();
+			}
+			catch(Exception e)
+			{
+				 System.out.println("---------STACK TRACE START---------------");
+				 e.printStackTrace();
+				 System.out.println("---------STACK TRACE END---------------");
+			}
+
+			return fileString;
+		}	
 }

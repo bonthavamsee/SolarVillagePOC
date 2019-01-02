@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.domainModel.controller.RestClient;
 import org.domainModel.govtPermit.BaseResponse;
 import org.domainModel.govtPermit.ElectricalPermit;
+import org.domainModel.govtPermit.PermitStatus;
 import org.domainModel.govtPermit.StructuralPermit;
 import org.kie.api.runtime.process.WorkItem;
 import org.kie.api.runtime.process.WorkItemManager;
@@ -37,14 +38,16 @@ public class RequestStatus implements org.kie.api.runtime.process.WorkItemHandle
 		if(requestType.equalsIgnoreCase("ElectricalPermit")){
 			ep=(ElectricalPermit)client.restGet(url, "ElectricalPermit");
 			if(ep==null)
-				throw new RuntimeException("RequestElectric Null Response");
+				results.put("permitStatus", PermitStatus.UNDEFINED.toString());
+			else
 			results.put("permitStatus", ep.getPermitStatus().toString());
 			
 		}
 		else if(requestType.equalsIgnoreCase("StructuralPermit")){
 			sp=(StructuralPermit)client.restGet(url, "StructuralPermit");
 			if(sp==null)
-				throw new RuntimeException("RequestStructural Null Response");
+				results.put("permitStatus", PermitStatus.UNDEFINED.toString());
+			else
 			results.put("permitStatus", sp.getPermitStatus().toString());
 		}
 		else{
