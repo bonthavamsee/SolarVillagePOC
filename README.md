@@ -35,14 +35,14 @@ It is required to clone the remote maven repository in order to build and deploy
 1. Create a folder to organize your git repositories.
 
   ```
-  > mkdir C:/Users/<username>/gits
-  > cd C:/Users/<username>/gits
+  > mkdir C:/Users/<username>/git
+  > cd C:/Users/<username>/git
   ```
 
 2. Execute the git clone command:  
 
   ```
-  > git clone url
+  > git clone https://github.com/godlike9999/SolarVillagePOC.git
   ```
 
 ### 3.1.2. Build the Maven components
@@ -53,22 +53,21 @@ Using the git repository that we cloned in the previous step, execute the maven 
 
 ```
 > cd SolarVillagePOC
-> mvn install -P war
+> mvn clean install
 ```
 
-> **Note**: the war profile is configured to generate a war component for the service tier project.
+> **Note**: the war profile is configured to generate a war component for the govt permit service project.
 
-### 3.1.3. Deploy the SOAP Web Server components
+### 3.1.3. Deploy the REST Web Server components
 
 The war and jar components that provide the REST web service functionality are `maven-webapp` components that can be deployed to any java based web server environment.
 
 Copy the Government Permit war file to JBoss Server:
 
 ```
-> robocopy "sourcepath" "{$EAP_HOME}\standalone\deployments" filename.war
+> robocopy "%USERPROFILE%\git\SolarVillagePOC\govtPermit\target" "%EAP_HOME%\standalone\deployments" govtPermit.war
 ```
 
-> **Note:** the POM for OrderPermit project includes the dependency instruction for governmentPermitServices parent project.
 
 ## 3.2. Build and deploy the business assets in Kie Server
 ### 3.2.1. JBoss EAP environment preparation
