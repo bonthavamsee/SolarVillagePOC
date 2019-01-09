@@ -27,3 +27,11 @@ https://drive.google.com/file/d/1qUf36dL9yaPiJu2ofNg7sJqvAtfoTd0O/view.
 
 Detailed instructions on how to use this project are given in this PDF document.
 [SolarVillage POC Documentation](src/resources/SolarVillage_Documentation.pdf)
+
+# 4. Process Diagrams
+
+ a) **New Order Process**
+ ![](src/resources/img/NewOrder.bpmn.jpg)
+
+b) **Government Permit Process**
+![](src/resources/img/GovtPermit.bpmn.jpg)
